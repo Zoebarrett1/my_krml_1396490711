@@ -223,7 +223,7 @@ class ItemIdTransformer(BaseEstimator, TransformerMixin):
 
 
 class EventTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, eve_df):
+    def __init__(self):
         # Load eve_df from the package's data directory
         data_file = pkg_resources.resource_filename(__name__, 'datasets/calendar_events.csv')
         self.calendar_events_df = pd.read_csv(data_file)
