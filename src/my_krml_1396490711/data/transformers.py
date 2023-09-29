@@ -74,3 +74,23 @@ class EventTransformer(BaseEstimator, TransformerMixin):
         return transformed_df
         
         #return clean_df_copy[['event_name', 'event_type']]
+
+class DeptIdTransformer(BaseEstimator, TransformerMixin):
+    def fit(self, clean_df, y=None):
+        return self
+    
+    def transform(self, clean_df):
+        clean_df_copy = clean_df.copy()
+        # Extract 'dept_id' by splitting 'item_id' at underscores and joining the first two elements
+        clean_df_copy['dept_id'] = clean_df_copy['item_id'].str.split('_').str[:2].str.join('_')
+        
+        #One-hot encode 'dept_id' using pd.get_dummies
+        one_hot_encoded = pd.get_dummies(clean_df_copy['dept_id'], prefix='dept_id', dtype=int)
+        
+        # Concatenate the one-hot encoded columns with the original DataFrame
+        transformed_df = pd.concat([clean_df_copy, one_hot_encoded], axis=1)
+        
+        # Drop the original 'dept_id' column
+        transformed_df.drop(['dept_id', 'item_id'], axis=1, inplace=True)
+
+        return transformed_df
