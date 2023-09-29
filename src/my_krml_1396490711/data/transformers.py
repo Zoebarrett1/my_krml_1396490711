@@ -13,7 +13,7 @@ class DateFeaturesTransformer(BaseEstimator, TransformerMixin):
         clean_df_copy['day'] = clean_df_copy['date'].dt.day
         clean_df_copy['week'] = clean_df_copy['date'].dt.strftime('%W')
         clean_df_copy['month'] = clean_df_copy['date'].dt.month
-        clean_df['year'] = clean_df['date'].dt.year
+        clean_df_copy['year'] = clean_df_copy['date'].dt.year
         
         # Convert to ordinal
         # ordinal_encoder = OrdinalEncoder()
