@@ -9,11 +9,11 @@ class DateFeaturesTransformer(BaseEstimator, TransformerMixin):
     def transform(self, clean_df):
         clean_df_copy = clean_df.copy()
         clean_df_copy['date'] = pd.to_datetime(clean_df_copy['date'])
-        clean_df_copy['weekday'] = clean_df_copy['date'].dt.weekday
-        clean_df_copy['day'] = clean_df_copy['date'].dt.day
-        clean_df_copy['week'] = clean_df_copy['date'].dt.strftime('%W')
-        clean_df_copy['month'] = clean_df_copy['date'].dt.month
-        clean_df_copy['year'] = clean_df_copy['date'].dt.year
+        clean_df_copy['weekday'] = clean_df_copy['date'].dt.weekday.astype(int)
+        clean_df_copy['day'] = clean_df_copy['date'].dt.day.astype(int)
+        clean_df_copy['week'] = clean_df_copy['date'].dt.strftime('%W').astype(int)
+        clean_df_copy['month'] = clean_df_copy['date'].dt.month.astype(int)
+        clean_df_copy['year'] = clean_df_copy['date'].dt.year.astype(int)
         
         # Convert to ordinal
         # ordinal_encoder = OrdinalEncoder()
